@@ -1,8 +1,11 @@
-import React from "react";
+import React from 'react';
 
-import NormalTemplate from "../../3_Templates/Normal/NormalTemplate";
+import NormalTemplate from '../../3_Templates/Normal/NormalTemplate';
 
-export default function SimpleContainer() {
-  return <NormalTemplate>Hello, world.</NormalTemplate>;
-}
+const HomeComponent = () => (
+  <NormalTemplate>
+    Hello, world.
+  </NormalTemplate>
+);
 
+export default HomeComponent;
