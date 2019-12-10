@@ -1,18 +1,18 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 
-import createStore from "./reducers/store";
-import HomeComponent from "./4_Pages/Home/HomeComponent";
+import createStore from './reducers/store';
+import HomeContainer from './4_Pages/Home/HomeContainer';
 
-import "./styles.css";
+import './styles.css';
 
 const store = createStore();
 
-const rootElement = document.getElementById("root");
+const rootElement = document.getElementById('root');
 ReactDOM.render(
   <Provider store={store}>
-    <HomeComponent />
+    <HomeContainer />
   </Provider>,
-  rootElement
+  rootElement,
 );

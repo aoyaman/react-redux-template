@@ -1,15 +1,14 @@
-import { combineReducers } from "redux";
-import { createStore as reduxCreateStore, applyMiddleware } from "redux";
-import logger from "redux-logger";
+import { createStore as reduxCreateStore, applyMiddleware, combineReducers } from 'redux';
+import logger from 'redux-logger';
 
-import todo from "./TodoReducer";
+import home from '../4_Pages/Home/HomeReducer';
 
 export default function createStore() {
   const store = reduxCreateStore(
     combineReducers({
-      todo
+      home,
     }),
-    applyMiddleware(logger)
+    applyMiddleware(logger),
   );
 
   return store;
