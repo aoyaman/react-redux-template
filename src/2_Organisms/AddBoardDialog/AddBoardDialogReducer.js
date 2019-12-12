@@ -13,7 +13,7 @@ const AddBoardDialogReducer = (state = initialState, action) => {
 
     case addBoardDialog.ADD_BOARD_DIALOG_ACTION_ON_CLOSE:
     case addBoardDialog.ADD_BOARD_DIALOG_ACTION_ON_SUBMIT:
-      return { ...state, isShow: false };
+      return { ...initialState };
 
     case addBoardDialog.ADD_BOARD_DIALOG_ACTION_ON_CHANGE:
       return { ...state, textValue: action.newValue };

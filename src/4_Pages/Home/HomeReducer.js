@@ -3,7 +3,7 @@ import * as addBoardDialog from '../../2_Organisms/AddBoardDialog/AddBoardDialog
 
 const initialState = {
   boardList: [],
-  selectedBoard: null,
+  selectedBoard: -1,
   isShowAddBoardDialog: false,
 };
 
@@ -16,7 +16,11 @@ const TodoReducer = (state = initialState, action) => {
       // 新しいボード
       const newBoard = {
         name: action.value,
-        list: [],
+        list: [
+          { name: 'すべきこと', todos: [] },
+          { name: '作業中', todos: [] },
+          { name: '完了', todos: [] },
+        ],
       };
 
       // ボードリストコピー
@@ -29,6 +33,12 @@ const TodoReducer = (state = initialState, action) => {
       newState.boardList.push(newBoard);
       return newState;
     }
+
+    // -----------------------------
+    // ボードを選択
+    // -----------------------------
+    case types.HOME_ACTION_ON_SELECT_BOARD:
+      return { ...state, selectedBoard: action.index };
 
     default:
       return state;

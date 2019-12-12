@@ -2,6 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
 
 import NormalTemplate from '../../3_Templates/Normal/NormalTemplate';
 import BoardComponent from '../../2_Organisms/Board/BoardComponent';
@@ -21,16 +26,29 @@ const HomeComponent = ({
 }) => {
   const classes = useStyles();
 
-  if (selectedBoard) {
+  // ボード選択中はボードを表示する
+  if (selectedBoard >= 0) {
     return (
       <NormalTemplate>
-        {selectedBoard && <BoardComponent board={selectedBoard} />}
+        {selectedBoard >= 0 && <BoardComponent board={boardList[selectedBoard]} />}
       </NormalTemplate>
     );
   }
 
+  // ボードを選択していない場合はボードリストを表示する
   return (
     <NormalTemplate>
+      <AppBar position="static">
+        <Toolbar variant="dense">
+          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" color="inherit">
+            Your Todo
+          </Typography>
+        </Toolbar>
+      </AppBar>
+
       <div className={classes.boardList}>
         {boardList.map((board, index) => (
           <div className={classes.board}>

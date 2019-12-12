@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -6,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
@@ -15,8 +16,10 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const BoardComponent = () => {
+const BoardComponent = (board) => {
   const classes = useStyles();
+
+  console.log('BoardComponent', board);
 
   return (
     <div className={classes.root}>
@@ -26,12 +29,24 @@ const BoardComponent = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" color="inherit">
-            Photos
+            { board.name }
           </Typography>
         </Toolbar>
       </AppBar>
+
+      { board }
     </div>
   );
+};
+
+
+BoardComponent.propTypes = {
+  board: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    list: PropTypes.arrayOf({
+      name: PropTypes.string,
+    }),
+  }).isRequired,
 };
 
 export default BoardComponent;
