@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const HomeComponent = ({
-  boardList, selectedBoard, onAddBoard, onSelectBoard,
+  boardList, selectedBoard, onAddBoard, onSelectBoard, onCloseBoard,
 }) => {
   const classes = useStyles();
 
@@ -30,7 +30,8 @@ const HomeComponent = ({
   if (selectedBoard >= 0) {
     return (
       <NormalTemplate>
-        {selectedBoard >= 0 && <BoardComponent board={boardList[selectedBoard]} />}
+        {selectedBoard >= 0
+          && <BoardComponent board={boardList[selectedBoard]} onCloseButton={onCloseBoard} />}
       </NormalTemplate>
     );
   }
@@ -70,10 +71,14 @@ const HomeComponent = ({
 HomeComponent.propTypes = {
   boardList: PropTypes.arrayOf({
     name: PropTypes.string,
+    list: PropTypes.arrayOf({
+      name: PropTypes.string,
+    }),
   }).isRequired,
-  selectedBoard: PropTypes.shape({}).isRequired,
+  selectedBoard: PropTypes.number.isRequired,
   onAddBoard: PropTypes.func.isRequired,
   onSelectBoard: PropTypes.func.isRequired,
+  onCloseBoard: PropTypes.func.isRequired,
 };
 
 

@@ -40,6 +40,12 @@ const TodoReducer = (state = initialState, action) => {
     case types.HOME_ACTION_ON_SELECT_BOARD:
       return { ...state, selectedBoard: action.index };
 
+    // -----------------------------
+    // ボードを閉じる
+    // -----------------------------
+    case types.HOME_ACTION_ON_CLOSE_BOARD_BUTTON:
+      return { ...state, selectedBoard: -1 };
+
     default:
       return state;
   }

@@ -16,6 +16,9 @@ const mapDispatchToProps = (dispatch) => ({
   onAddBoard: () => {
     dispatch({ type: types.HOME_ACTION_ON_ADD_BOARD_BUTTON });
   },
+  onCloseBoard: () => {
+    dispatch({ type: types.HOME_ACTION_ON_CLOSE_BOARD_BUTTON });
+  },
 });
 
 const HomeContainer = connect(
