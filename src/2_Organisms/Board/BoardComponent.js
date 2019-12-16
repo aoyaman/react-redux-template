@@ -7,6 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
+import ListItem from '../ListItem/ListItemComponent';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -31,6 +33,14 @@ const BoardComponent = ({ board, onCloseButton }) => {
           </Typography>
         </Toolbar>
       </AppBar>
+
+      <div>
+        {board.list.map((item) => (
+          <div className={classes.item}>
+            <ListItem item={item} />
+          </div>
+        ))}
+      </div>
 
     </div>
   );
