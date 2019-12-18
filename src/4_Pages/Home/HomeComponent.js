@@ -11,6 +11,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import NormalTemplate from '../../3_Templates/Normal/NormalTemplate';
 import BoardComponent from '../../2_Organisms/Board/BoardComponent';
 import AddBoardDialogContainer from '../../2_Organisms/AddBoardDialog/AddBoardDialogContainer';
+import AddTodoDialogContainer from '../../2_Organisms/AddTodoDialog/AddTodoDialogContainer';
 
 const useStyles = makeStyles((theme) => ({
   boardList: {
@@ -23,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 const HomeComponent = ({
   boardList, selectedBoard, onAddBoard, onSelectBoard, onCloseBoard,
+  onSelectTodo, onAddTodo,
 }) => {
   const classes = useStyles();
 
@@ -31,7 +33,16 @@ const HomeComponent = ({
     return (
       <NormalTemplate>
         {selectedBoard >= 0
-          && <BoardComponent board={boardList[selectedBoard]} onCloseButton={onCloseBoard} />}
+          && (
+            <BoardComponent
+              board={boardList[selectedBoard]}
+              onCloseButton={onCloseBoard}
+              onSelectTodo={(listIndex, todoIndex) => (
+                onSelectTodo(selectedBoard, listIndex, todoIndex)
+              )}
+              onAddTodo={(listIndex) => onAddTodo(selectedBoard, listIndex)}
+            />
+          )}
       </NormalTemplate>
     );
   }
@@ -64,6 +75,7 @@ const HomeComponent = ({
       </div>
 
       <AddBoardDialogContainer />
+      <AddTodoDialogContainer />
     </NormalTemplate>
   );
 };
@@ -79,6 +91,8 @@ HomeComponent.propTypes = {
   onAddBoard: PropTypes.func.isRequired,
   onSelectBoard: PropTypes.func.isRequired,
   onCloseBoard: PropTypes.func.isRequired,
+  onAddTodo: PropTypes.func.isRequired,
+  onSelectTodo: PropTypes.func.isRequired,
 };
 
 

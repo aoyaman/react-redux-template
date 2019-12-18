@@ -1,17 +1,25 @@
 import * as types from './HomeActionTypes';
 import * as addBoardDialog from '../../2_Organisms/AddBoardDialog/AddBoardDialogActionTypes';
+import * as addTodoDialog from '../../2_Organisms/AddTodoDialog/AddTodoDialogActionTypes';
 
 const initialState = {
   boardList: [],
   selectedBoard: -1,
   isShowAddBoardDialog: false,
+  isShowAddTodoDialog: false,
 };
 
 const TodoReducer = (state = initialState, action) => {
   switch (action.type) {
+    // -----------------------------
+    // ボード追加ボタン押下
+    // -----------------------------
     case types.HOME_ACTION_ON_ADD_BOARD_BUTTON:
       return { ...state, isShowAddBoardDialog: true };
 
+    // -----------------------------
+    // ボード追加ダイアログでsubmit
+    // -----------------------------
     case addBoardDialog.ADD_BOARD_DIALOG_ACTION_ON_SUBMIT: {
       // 新しいボード
       const newBoard = {
@@ -45,6 +53,47 @@ const TodoReducer = (state = initialState, action) => {
     // -----------------------------
     case types.HOME_ACTION_ON_CLOSE_BOARD_BUTTON:
       return { ...state, selectedBoard: -1 };
+
+    // -----------------------------
+    // TODO追加ボタン押下
+    // -----------------------------
+    case types.HOME_ACTION_ON_ADD_TODO_BUTTON:
+      return { ...state, isShowAddTodoDialog: true };
+
+    // -----------------------------
+    // Todo追加ダイアログでsubmit
+    // -----------------------------
+    case addTodoDialog.ADD_TODO_DIALOG_ACTION_ON_SUBMIT: {
+      // 新しいTodo
+      const newTodo = {
+        name: action.value,
+      };
+
+      // ボードリストコピー
+      const newState = { ...state, boardList: [] };
+      for (let i = 0; i < state.boardList.length; i += 1) {
+        if (i === action.boardIndex) {
+          const board = { ...state.boardList[i], list: [] };
+          for (let j = 0; j < state.boardList[i].list.length; j += 1) {
+            if (j === action.listIndex) {
+              const listItem = { ...state.boardList[i].list[j], todos: [] };
+              for (let k = 0; k < state.boardList[i].list[j].todos.length; k += 1) {
+                listItem.todos.push(state.boardList[i].list[j].todos[k]);
+              }
+              listItem.todos.push(newTodo);
+              board.list.pus(listItem);
+            } else {
+              board.list.push(state.boardList[i].list[j]);
+            }
+          }
+          newState.boardList.push(board);
+        } else {
+          newState.boardList.push(state.boardList[i]);
+        }
+      }
+      return newState;
+    }
+
 
     default:
       return state;

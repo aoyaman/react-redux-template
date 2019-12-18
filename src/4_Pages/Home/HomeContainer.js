@@ -19,6 +19,12 @@ const mapDispatchToProps = (dispatch) => ({
   onCloseBoard: () => {
     dispatch({ type: types.HOME_ACTION_ON_CLOSE_BOARD_BUTTON });
   },
+  onSelectTodo: () => {
+    dispatch({ type: types.HOME_ACTION_ON_SELECT_TODO_BUTTON });
+  },
+  onAddTodo: () => {
+    dispatch({ type: types.HOME_ACTION_ON_ADD_TODO_BUTTON });
+  },
 });
 
 const HomeContainer = connect(

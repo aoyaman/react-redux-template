@@ -5,32 +5,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
-import { red } from '@material-ui/core/colors';
+import Button from '@material-ui/core/Button';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   card: {
     maxWidth: 345,
   },
-  media: {
-    height: 0,
-    paddingTop: '56.25%', // 16:9
-  },
-  expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)',
-  },
-  avatar: {
-    backgroundColor: red[500],
-  },
 }));
 
-const ListItemComponent = ({ item }) => {
+const ListItemComponent = ({ item, onSelectTodo, onAddTodo }) => {
   const classes = useStyles();
 
   return (
@@ -39,7 +22,16 @@ const ListItemComponent = ({ item }) => {
         title={item.name}
       />
       <CardContent>
-        ...
+        {item.todos.map((todo, index) => (
+          <div className={classes.board}>
+            <Button variant="contained" color="primary" onClick={() => onSelectTodo(index)}>
+              { todo.name }
+            </Button>
+          </div>
+        ))}
+        <Button variant="contained" onClick={() => onAddTodo()}>
+          新しいTODOを作成する
+        </Button>
       </CardContent>
     </Card>
   );
@@ -49,10 +41,12 @@ const ListItemComponent = ({ item }) => {
 ListItemComponent.propTypes = {
   item: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    list: PropTypes.arrayOf({
+    todos: PropTypes.arrayOf({
       name: PropTypes.string,
     }),
   }).isRequired,
+  onAddTodo: PropTypes.func.isRequired,
+  onSelectTodo: PropTypes.func.isRequired,
 };
 
 export default ListItemComponent;

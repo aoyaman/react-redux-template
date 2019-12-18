@@ -16,9 +16,17 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2),
   },
+  itemList: {
+    padding: theme.spacing(3, 2),
+  },
+  item: {
+    padding: theme.spacing(3, 2),
+  },
 }));
 
-const BoardComponent = ({ board, onCloseButton }) => {
+const BoardComponent = ({
+  board, onCloseButton, onSelectTodo, onAddTodo,
+}) => {
   const classes = useStyles();
 
   return (
@@ -34,10 +42,14 @@ const BoardComponent = ({ board, onCloseButton }) => {
         </Toolbar>
       </AppBar>
 
-      <div>
-        {board.list.map((item) => (
+      <div className={classes.itemList}>
+        {board.list.map((item, listIndex) => (
           <div className={classes.item}>
-            <ListItem item={item} />
+            <ListItem
+              item={item}
+              onSelectTodo={(todoIndex) => onSelectTodo(listIndex, todoIndex)}
+              onAddTodo={() => onAddTodo(listIndex)}
+            />
           </div>
         ))}
       </div>
@@ -55,6 +67,8 @@ BoardComponent.propTypes = {
     }),
   }).isRequired,
   onCloseButton: PropTypes.func.isRequired,
+  onAddTodo: PropTypes.func.isRequired,
+  onSelectTodo: PropTypes.func.isRequired,
 };
 
 export default BoardComponent;

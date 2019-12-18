@@ -5,10 +5,12 @@ import storage from 'redux-persist/lib/storage';
 
 import home from '../4_Pages/Home/HomeReducer';
 import addBoardDialog from '../2_Organisms/AddBoardDialog/AddBoardDialogReducer';
+import addTodoDialog from '../2_Organisms/AddTodoDialog/AddTodoDialogReducer';
 
 const rootReducer = combineReducers({
   home,
   addBoardDialog,
+  addTodoDialog,
 });
 
 // 永続化の設定
