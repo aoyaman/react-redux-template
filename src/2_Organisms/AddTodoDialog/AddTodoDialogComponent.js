@@ -6,12 +6,11 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-const useStyles = makeStyles((theme) => ({
-  context: {
-    padding: theme.spacing(3, 2),
+const useStyles = makeStyles(() => ({
+  title: {
+    fontWeight: 'bold',
   },
 }));
 
@@ -21,16 +20,13 @@ const AddTodoDialogComponent = ({
   const classes = useStyles();
   return (
     <Dialog open={isShow} onClose={onCloseDialog} aria-labelledby="form-dialog-title">
-      <DialogTitle id="form-dialog-title">ボードの追加</DialogTitle>
+      <DialogTitle id="form-dialog-title" className={classes.title}>TODOの追加</DialogTitle>
       <DialogContent>
-        <DialogContentText className={classes.context}>
-          「仕事」や「プライベート」など、Todoを好きなボードで切り分けて管理できます。
-        </DialogContentText>
         <TextField
           autoFocus
           margin="dense"
           id="name"
-          label="ボードの名前"
+          label="TODOの内容"
           value={textValue}
           fullWidth
           onChange={(event) => onChangeValue(event.target.value)}

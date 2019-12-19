@@ -11,7 +11,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import NormalTemplate from '../../3_Templates/Normal/NormalTemplate';
 import BoardComponent from '../../2_Organisms/Board/BoardComponent';
 import AddBoardDialogContainer from '../../2_Organisms/AddBoardDialog/AddBoardDialogContainer';
-import AddTodoDialogContainer from '../../2_Organisms/AddTodoDialog/AddTodoDialogContainer';
 
 const useStyles = makeStyles((theme) => ({
   boardList: {
@@ -75,7 +74,6 @@ const HomeComponent = ({
       </div>
 
       <AddBoardDialogContainer />
-      <AddTodoDialogContainer />
     </NormalTemplate>
   );
 };

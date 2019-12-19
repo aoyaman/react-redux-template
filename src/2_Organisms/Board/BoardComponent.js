@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
 import ListItem from '../ListItem/ListItemComponent';
+import AddTodoDialogContainer from '../AddTodoDialog/AddTodoDialogContainer';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,7 +54,7 @@ const BoardComponent = ({
           </div>
         ))}
       </div>
-
+      <AddTodoDialogContainer />
     </div>
   );
 };
