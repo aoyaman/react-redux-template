@@ -22,8 +22,8 @@ const mapDispatchToProps = (dispatch) => ({
   onSelectTodo: () => {
     dispatch({ type: types.HOME_ACTION_ON_SELECT_TODO_BUTTON });
   },
-  onAddTodo: () => {
-    dispatch({ type: types.HOME_ACTION_ON_ADD_TODO_BUTTON });
+  onAddTodo: (selectedBoard, listIndex) => {
+    dispatch({ type: types.HOME_ACTION_ON_ADD_TODO_BUTTON, selectedBoard, listIndex });
   },
 });
 

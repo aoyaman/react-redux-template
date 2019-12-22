@@ -7,6 +7,8 @@ const initialState = {
   selectedBoard: -1,
   isShowAddBoardDialog: false,
   isShowAddTodoDialog: false,
+  addTodoBoardIndex: -1,
+  addTodoListIndex: -1,
 };
 
 const TodoReducer = (state = initialState, action) => {
@@ -58,7 +60,12 @@ const TodoReducer = (state = initialState, action) => {
     // TODO追加ボタン押下
     // -----------------------------
     case types.HOME_ACTION_ON_ADD_TODO_BUTTON:
-      return { ...state, isShowAddTodoDialog: true };
+      return {
+        ...state,
+        isShowAddTodoDialog: true,
+        addTodoBoardIndex: action.selectedBoard,
+        addTodoListIndex: action.listIndex,
+      };
 
     // -----------------------------
     // Todo追加ダイアログでsubmit
@@ -72,16 +79,16 @@ const TodoReducer = (state = initialState, action) => {
       // ボードリストコピー
       const newState = { ...state, boardList: [] };
       for (let i = 0; i < state.boardList.length; i += 1) {
-        if (i === action.boardIndex) {
+        if (i === state.addTodoBoardIndex) {
           const board = { ...state.boardList[i], list: [] };
           for (let j = 0; j < state.boardList[i].list.length; j += 1) {
-            if (j === action.listIndex) {
+            if (j === state.addTodoListIndex) {
               const listItem = { ...state.boardList[i].list[j], todos: [] };
               for (let k = 0; k < state.boardList[i].list[j].todos.length; k += 1) {
                 listItem.todos.push(state.boardList[i].list[j].todos[k]);
               }
               listItem.todos.push(newTodo);
-              board.list.pus(listItem);
+              board.list.push(listItem);
             } else {
               board.list.push(state.boardList[i].list[j]);
             }
