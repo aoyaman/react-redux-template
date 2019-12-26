@@ -7,9 +7,12 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   card: {
     maxWidth: 345,
+  },
+  todo: {
+    padding: theme.spacing(1, 0),
   },
 }));
 
@@ -23,8 +26,8 @@ const ListItemComponent = ({ item, onSelectTodo, onAddTodo }) => {
       />
       <CardContent>
         {item.todos.map((todo, index) => (
-          <div className={classes.board}>
-            <Button variant="contained" color="primary" onClick={() => onSelectTodo(index)}>
+          <div className={classes.todo}>
+            <Button variant="contained" color="primary" fullWidth onClick={() => onSelectTodo(index)}>
               { todo.name }
             </Button>
           </div>
